@@ -1,0 +1,10 @@
+spring:
+  datasource:
+    url: jdbc:mariadb://localhost:3306/Kanban
+    username: kbnusr
+    password: userdb24
+    hikari:
+      maximum-pool-size: 10
+      minimum-idle: 10
+      pool-name: mariaDbKanbanPool
+    driver-class-name: org.mariadb.jdbc.Driver

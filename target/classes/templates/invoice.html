@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Factura</title>
+    <style>
+        body { font-family: Arial, sans-serif; }
+        h1 { color: #2c3e50; }
+        table {width: 100%; border-collapse: collapse; margin-top: 5px; border-radius: 10px}
+        th, td { border: 1px solid #000000; padding: 2px; text-align: left; }
+        th { background-color: #d3d3d3; }
+
+        .tab1 {
+            display: inline-block;
+            margin-left: 450px;
+        }
+
+        .tab2 {
+            display: inline-block;
+            margin-left: 200px;
+        }
+        .tab3 {
+            display: inline-block;
+            margin-left: 190;
+        }
+        .tab4 {
+            display: inline-block;
+            margin-left: 380px;
+        }
+        .tab5 {
+            display: inline-block;
+            margin-left: 240px;
+        }
+        .text-center{
+           text-align: center
+        }
+
+        .text-no-padding{
+            margin: 0
+        }
+
+        .invoice-info-properties {
+          margin: 0;
+          text-align: center
+        }
+        .margin-top-fixed {
+          margin-top: 0;
+        }
+    </style>
+</head>
+<body>
+<table>
+    <tr>
+        <td>
+            <img src="https://image2url.com/images/1761078916876-10af5ace-e848-482f-a1f3-8ba10384921f.png" width="180px" height="90px" alt="company-logo"/>
+            <div>
+                <p class="text-no-padding">Prof. Dr. Victorio Curiel, San Lorenzo Nº 111459</p>
+                <p class="text-no-padding">Tel: +595 991231231</p>
+                <p class="text-no-padding">Email: clientes@blackmoon.com.py</p>
+            </div>
+        </td>
+        <td>
+            <div>
+                <p class = "invoice-info-properties">Timbrado Nº 16739024</p>
+                <p class = "invoice-info-properties">Fecha inicio Vigencia 20-10-2025</p>
+                <p class = "invoice-info-properties">Fecha inicio Vigencia 31-10-2026</p>
+                <p class = "invoice-info-properties">R.U.C: 80012416-2</p>
+                <p class = "invoice-info-properties"><b>FACTURA</b></p>
+                <p>Nº 015-001-<b th:text="${digits}"></b></p>
+            </div>
+        </td>
+    </tr>
+</table>
+<table>
+    <tr>
+        <td colspan= "2">
+            <p class= "margin-top-fixed">FECHA DE EMISIÓN: <span th:text="${issue_date}"></span></p>
+        </td>
+        <td colspan= "3">
+            <p class= "margin-top-fixed">CONDICIÓN DE VENTA: CONTADO </p>
+        </td>
+        <td th:text="${cash_payment}" class = "text-center"></td>
+        <td colspan= "2">
+            <p class= "margin-top-fixed">CONDICIÓN DE VENTA: CRÉDITO </p>
+        </td>
+        <td th:text="${cash_credit}" class = "text-center"></td>
+    </tr>
+    <tr>
+        <td colspan= "9">
+            <p class= "margin-top-fixed">NOMBRE O RAZÓN SOCIAL: <span th:text="${social_reason}"></span> <span class="tab1">RUC/C.I.Nº: <span th:text="${ruc_ci}"></span></span></p>
+        </td>
+    </tr>
+    <tr>
+        <td colspan= "9">
+            <p class= "margin-top-fixed">DIRECCIÓN: <span  th:text="${address}"></span></b> <span class="tab2"> LOCALIDAD: <span th:text="${locality}"></span> </span>  <span class="tab3">TELÉFONO: <span th:text="${telephone}"></span> </span></p>
+        </td>
+    </tr>
+    <tr>
+        <td colspan= "9">
+            <p class= "margin-top-fixed">NOTA DE REMISIÓN Nº: <span th:text="${remission_note}" ></span>  <span class="tab4"> FECHA: <span th:text="${remission_date}" ></span>  </span>  <span class="tab5">  VENCIMIENTO: <span th:text="${remission_expiration_date}" ></span> </span></p>
+        </td>
+    </tr>
+</table>
+<table>
+    <thead>
+    <tr>
+        <th colspan= "1" rowspan= "2">ART./COD.</th>
+        <th colspan= "1" rowspan= "2">DESCRIPCIÓN</th>
+        <th colspan= "1" rowspan= "2">CANTIDAD</th>
+        <th colspan= "1" rowspan= "2">PRECIO UNITARIO</th>
+        <th class = "text-center" colspan= "3" rowspan= "1">VALOR DE VENTA</th>
+    </tr>
+    <tr>
+        <th >EXENTAS</th>
+        <th>IVA 5%</th>
+        <th>IVA 10%</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="item : ${items}">
+        <td th:text="${item.code}"></td>
+        <td th:text="${item.description}"></td>
+        <td th:text="${item.quantity}"></td>
+        <td th:text="${item.unitPrice}"></td>
+        <td th:text="${item.exempt}"></td>
+        <td th:text="${item.iva5}"></td>
+        <td th:text="${item.iva10}"></td>
+    </tr>
+    <tr>
+        <td colspan= "4">
+            <p class= "margin-top-fixed">VALOR PARCIAL: </p>
+        </td>
+        <td th:text="${parcial_exempt}" ></td>
+        <td th:text="${parcial_iva5}"></td>
+        <td th:text="${parcial_value}"></td>
+    </tr>
+    <tr>
+        <td colspan= "6">
+            <p class= "margin-top-fixed">TOTAL A PAGAR Gs. : <span th:text="${total_price_letters}"></span> </p>
+        </td>
+        <td th:text="${total_price}"></td>
+    </tr>
+    <tr>
+        <td colspan= "7">
+            <p class= "margin-top-fixed">LIQUIDACIÓN DEL IVA: (5%) <span th:text="${iva_liquidation_5}" ></span>
+                <span class="tab2"> (10%): </span>
+                <span th:text="${iva_liquidation_10}" > </span>
+                <span class="tab3"> TOTAL IVA: </span>
+                <span th:text="${total_iva}" ></span>
+            </p>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
