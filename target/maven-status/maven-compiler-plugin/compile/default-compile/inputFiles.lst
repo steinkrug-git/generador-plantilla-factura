@@ -2,3 +2,4 @@
 /home/me/factura-venta-builder/src/main/java/com/store/mcs/document/generator/config/ThymeleafConfig.java
 /home/me/factura-venta-builder/src/main/java/com/store/mcs/document/generator/controller/PdfController.java
 /home/me/factura-venta-builder/src/main/java/com/store/mcs/document/generator/service/PdfService.java
+/home/me/factura-venta-builder/src/main/java/com/store/mcs/document/generator/utils/StringUtils.java

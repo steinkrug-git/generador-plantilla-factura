@@ -12,6 +12,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static com.store.mcs.document.generator.utils.StringUtils.convertAmountToWords;
+
 @RestController
 public class PdfController {
 
@@ -37,10 +39,10 @@ public class PdfController {
             data.put("remission_note", ""); //hacer dinámico luego
             data.put("remission_date", "");
             data.put("remission_expiration_date", "");
-            data.put("parcial_value", 1020000);
+            data.put("parcial_value", 3200000);
             data.put("parcial_exempt", "");
             data.put("parcial_iva5", "");
-            data.put("total_price_letters", "Un millón ventemil");
+            data.put("total_price_letters", convertAmountToWords("3200000"));
             data.put("total_price", 1020000);
             data.put("iva_liquidation_5", "");
             data.put("iva_liquidation_10", 70321);
